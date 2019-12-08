@@ -1,6 +1,7 @@
 const express = require('express');
 const socketio = require('socket.io');
 const http = require('http');
+const cors = require('cors');
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users/users');
 
@@ -39,9 +40,6 @@ io.on('connection', (socket) => {
     })
 })
 require('./routes/chatRouter')(app);
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     next();
-//   })
+app.use(cors());
 
 server.listen(PORT);
